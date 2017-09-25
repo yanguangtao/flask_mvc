@@ -1,0 +1,7 @@
+Flask==0.11.1
+redis==2.10.5
+Flask_Script==2.0.5
+requests==2.11.1
+SQLAlchemy==1.1.2
+IPy==0.83
+Jinja2==2.8

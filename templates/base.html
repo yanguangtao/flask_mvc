@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+
+	<script src="/static/jquery.min.js"></script>
+	<script src="/static/jquery-ui.js"></script>
+	<script src="/static/moment.min.js"></script>
+    <script src="/static/page.js"></script>
+    <script src="/static/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap-3.3.5/js/bootstrap-switch.min.js"></script>
+    <script src="/static/AmazeUI-2.7.2/assets/js/amazeui.min.js"></script>
+    <script src="/static/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/static/formatter_time.js"></script>
+
+    <link rel="stylesheet" href="/static/bootstrap-3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/bootstrap-3.3.5/css/bootstrap-switch.min.css" />
+    <link rel="stylesheet" href="/static/Font-Awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/animate.css" />
+    <link rel="stylesheet" href="/static/AmazeUI-2.7.2/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/static/app.css" />
+    <link rel="stylesheet" href="/static/bootstrap-table/bootstrap-table.css">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <div class="warn_modal"></div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %} 缓存 {% endblock %}
+{% from "macros.html" import input_time %}
+
+{%block content%}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row am-margin-vertical">
+        <div class="col-sm-12">
+            <h1>
+                用户
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="list-body">
+                <table id="user_table"
+                       data-toggle="table"
+
+                       data-pagination="true"
+                       data-side-pagination="server"
+                       data-query-params="queryParams"
+                       data-show-columns="true"
+                       data-query-params-type="page"
+                       data-response-handler="responseHandler"
+                       data-url="/user"
+                       class="am-table am-table-bordered am-table-compact am-text-nowrap">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    createUserTable();
+    $("#user_table").bootstrapTable().on('click-row.bs.table', function (e, row, $element){
+        // 行点击, 改变行颜色
+        $('#redis_table tbody tr').css('background-color','white');
+        $element.css('background-color','#E0EEEE');
+    });
+
+    function createUserTable() {
+        $('#user_table').bootstrapTable({
+
+            columns: [{
+                field: '',
+                title: '序号',
+                width:'50px',
+                formatter: function (value, row, index) {
+                    return index+1;
+                }
+            }, {
+                field: 'name',
+                title: '昵称',
+
+
+            },{
+                field: 'update_time',
+                title: '更新时间',
+
+            },{
+                field: 'create_time',
+                title: '创建时间',
+
+            }]
+        });
+    }
+    function queryParams(p) {
+
+        return {page: p.pageNumber};
+    }
+    function responseHandler(res) {
+        if(res.ret==0) {
+            return {
+                rows: res.data.list,
+                total: res.data.total
+            }
+        }
+        else {
+            show_msg("查询出错！");
+	        return false;
+	    }
+    }
+    function show_msg(msg){
+        $(".warn_modal").text(msg);
+        $(".warn_modal").show();0
+        setTimeout(function(){
+                $(".warn_modal").fadeOut();
+        }, 3000);
+    }
+
+
+</script>
+{% endblock %}

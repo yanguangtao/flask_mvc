@@ -1,0 +1,58 @@
+<!-- 宏 -->
+
+<!-- 普通文本输入框 -->
+{% macro input(label, field, default_value="", type="text", style="", alert="", tag="") -%}
+<div class="am-form-group col-sm-4">
+    <label><span style="color:red">{{ tag }}</span>{{ label }}</label>
+    <input class="form-control am-radius" type="{{ type }}" id="{{ field }}" name="{{ field }}" value="{{ default_value }}" {{ style }} data-validation-message="{{ alert }}" />
+</div>
+{%- endmacro %}
+
+<!-- 状态输入框 -->
+{% macro input_flag(label, field) -%}
+<div class="col-sm-4">
+    <label>{{ label }}</label><br>
+    <select name="{{ field }}" id="{{ field }}" data-am-selected="{btnWidth:'100%'}">
+        <option value="1">有效</option>
+        <option value="0">无效</option>
+    </select>
+</div>
+{%- endmacro %}
+
+<!-- 备注文本输入框 -->
+{% macro input_multi(label, field, default_value="", rows="1") -%}
+<div class="am-form-group col-sm-4">
+    <label>{{ label }}</label>
+    <textarea class="form-control am-radius" name="{{ field }}" id="{{ field }}" value="{{ default_value }}", rows="1" >{{ default_value }}</textarea>
+</div>
+{%- endmacro %}
+
+<!-- 日期选择框 -->
+{% macro input_time(label, field, default_value="", style="required") -%}
+<div class="am-form-group col-sm-4">
+    <label>{{ label }}</label>
+    <input class="form-control am-radius am-form-field" type="text" name="{{ field }}" id="{{ field }}" value="{{ default_value }}" data-am-datepicker {{ style }}  />
+</div>
+{%- endmacro %}
+
+<!-- 宏 -->
+
+<!-- （渲染）状态下拉框 -->
+{% macro render_flag(label, field, default_value, style="") -%}
+<div class="col-sm-4">
+    <label>{{ label }}</label>
+    <select name="{{ field }}" id="{{ field }}" data-am-selected="{btnWidth:'100%'}">
+        {% set tmp = default_value | string %}
+        {% if tmp == "1" %}
+            <option value="1" selected>有效</option>
+            <option value="0">无效</option>
+        {% else %}
+            <option value="1">有效</option>
+            <option value="0" selected>无效</option>
+        {% endif %}
+    </select>
+</div>
+{%- endmacro %}
+
+
+
